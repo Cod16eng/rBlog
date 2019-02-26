@@ -1,38 +1,26 @@
-<div class="well">
-                    <h2 class="page-header">Manage Posts <a href="new.html" class="pull-right btn btn-success">Add New</a></h2>
-                    <table class="table table-striped">
-                      <tr>
-                        <th>Post Tiltle</th>
-                        <th>Categories</th>
-                        <th>Actions</th>
-                      </tr>
-                      <tr>
-                        <td>Post Number One</td>
-                        <td>News</td>
-                        <td><a href="#" class="btn btn-primary">Edit</a> | 
-                            <a href="#" class="btn btn-danger">delete</a></td>
-                      </tr>
-                      <tr>
-                        <td>Post Number Two</td>
-                        <td>Tutorials</td>
-                        <td><a href="#" class="btn btn-primary">Edit</a> | 
-                            <a href="#" class="btn btn-danger">delete</a></td>
-                      </tr>
-                      <tr>
-                        <td>Post Number Three</td>
-                        <td>Releases</td>
-                        <td><a href="#" class="btn btn-primary">Edit</a> | 
-                          <a href="#" class="btn btn-danger">delete</a></td>
-                      </tr>
-                      <tr>
-                        <td>Post Number Four</td>
-                        <td>Events</td>
-                        <td><a href="#" class="btn btn-primary">Edit</a> | 
-                            <a href="#" class="btn btn-danger">delete</a></td>
-                      </tr>
-                      
-                      
-                    </table>
-                    
-                    </div>
-                </div>
+<h2 class="page-header">Manage Posts <%= link_to 'Add New', new_admin_post_path, class: 'btn btn-success pull-right' %></h2>
+<% if @posts.exists? %>
+    <table class="table table-striped">
+      <tr>
+        <th>Post Tiltle</th>
+        <th>Post Category</th>
+        <th>Created on</th>                        
+        <th>Actions</th>
+      </tr>
+      <% @posts.each do |post| %>
+      <tr>                        
+        <td><%= post.title %></td>
+        <td><%= post.category.name %></td>
+
+        <td><%= post.created_at.to_time.strftime(' %B %e at %l:%M %p') %></td>
+        <td><%= link_to 'Edit', edit_admin_post_path(post), class: 'btn btn-primary' %> | 
+            <%= link_to 'Delete', admin_post_path(post), class: 'btn btn-danger', method: :delete, data: {confirm: 'Are you sure?'} %></td>
+      </tr>
+      
+      <% end %>
+      
+    </table>
+    <% else %>
+
+    <p>There are no posts</p>
+    <% end %>
