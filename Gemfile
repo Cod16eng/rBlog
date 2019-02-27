@@ -36,6 +36,10 @@ gem 'simple_form'
 gem 'will_paginate', '~> 3.1', '>= 3.1.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'paperclip', '~> 6.1'
+gem 'wysiwyg-rails', '~> 2.9', '>= 2.9.3'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.4'
+gem "font-awesome-sass"
 
 
 group :development, :test do
