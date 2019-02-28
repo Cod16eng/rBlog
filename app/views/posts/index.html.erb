@@ -1,52 +1,29 @@
-<div class="row">
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/rails1.jpg">
+<div id="posts-index">
+    <% if @posts.exists? %>
+        <% @posts.each_slice(2) do |post| %>
+            <div class="row">
+                <% post.each do |post| %>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="post">
+                            <%= image_tag post.image.url, width: "100%" %>
                                 <div class="post-content">
-                                    <h3>Lorem Ipsum</h3>
-                                    <small>Posted by: Codrin on February 22 2019</small>
-                                    <p>Organic fashion axe unicorn enamel pin pug. Green juice iceland raclette, polaroid wayfarers health goth af umami flannel iPhone four loko. Single-origin coffee DIY banh mi man bun butcher, +1 palo santo waistcoat asymmetrical gochujang salvia seitan sartorial. Air plant semiotics sriracha, blog beard knausgaard craft beer hammock PBR&B marfa intelligentsia kogi. Prism meditation bitters artisan tacos thundercats before they sold out pork belly locavore echo park lyft cardigan trust fund coloring book distillery. Artisan chambray ugh bespoke.</p>
-                                    <a class="btn btn-primary btn-block">Read More</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/rails1.jpg">
-                                <div class="post-content">
-                                    <h3>Lorem Ipsum</h3>
-                                    <small>Posted by: Codrin on February 22 2019</small>
-                                    <p>Organic fashion axe unicorn enamel pin pug. Green juice iceland raclette, polaroid wayfarers health goth af umami flannel iPhone four loko. Single-origin coffee DIY banh mi man bun butcher, +1 palo santo waistcoat asymmetrical gochujang salvia seitan sartorial. Air plant semiotics sriracha, blog beard knausgaard craft beer hammock PBR&B marfa intelligentsia kogi. Prism meditation bitters artisan tacos thundercats before they sold out pork belly locavore echo park lyft cardigan trust fund coloring book distillery. Artisan chambray ugh bespoke.</p>
-                                    <a class="btn btn-primary btn-block">Read More</a>
-                                    
-                                </div>
-                            </div>
+                                    <h3><%= post.title %></h3>
+                                    <small>Posted by: <%= post.user.name %> on <%= post.created_at.to_time.strftime('%B %e at %l:%M %p') %></small>
+                                    <%= raw post.body.truncate(190) %>
+                                    <%= link_to  "Read More", post_path(post), class:'btn btn-primary' %>               
+                                </div>                            
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="images/rails1.jpg">
-                                <div class="post-content">
-                                    <h3>Lorem Ipsum</h3>
-                                    <small>Posted by: Codrin on February 22 2019</small>
-                                    <p>Organic fashion axe unicorn enamel pin pug. Green juice iceland raclette, polaroid wayfarers health goth af umami flannel iPhone four loko. Single-origin coffee DIY banh mi man bun butcher, +1 palo santo waistcoat asymmetrical gochujang salvia seitan sartorial. Air plant semiotics sriracha, blog beard knausgaard craft beer hammock PBR&B marfa intelligentsia kogi. Prism meditation bitters artisan tacos thundercats before they sold out pork belly locavore echo park lyft cardigan trust fund coloring book distillery. Artisan chambray ugh bespoke.</p>
-                                    <a class="btn btn-primary btn-block">Read More</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="post">
-                                <img src="assets/images/rails1.jpg">
-                                <div class="post-content">
-                                    <h3>Lorem Ipsum</h3>
-                                    <small>Posted by: Codrin on February 22 2019</small>
-                                    <p>Organic fashion axe unicorn enamel pin pug. Green juice iceland raclette, polaroid wayfarers health goth af umami flannel iPhone four loko. Single-origin coffee DIY banh mi man bun butcher, +1 palo santo waistcoat asymmetrical gochujang salvia seitan sartorial. Air plant semiotics sriracha, blog beard knausgaard craft beer hammock PBR&B marfa intelligentsia kogi. Prism meditation bitters artisan tacos thundercats before they sold out pork belly locavore echo park lyft cardigan trust fund coloring book distillery. Artisan chambray ugh bespoke.</p>
-                                    <a class="btn btn-primary btn-block">Read More</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <% end %>        
+            </div>
+        <% end %>
+
+        <div align="center"> <%= will_paginate @posts %></div>
+
+    <% else %>
+
+    <p>There are no posts to display</p>
+
+    <% end %> 
+
+</div>

@@ -1,4 +1,4 @@
-<h2 class="page-header">Manage Users <%= link_to 'Add New', new_admin_user_path, class: 'btn btn-success pull-right'%></h2>
+<h2 class="page-header">Manage Users <%= link_to 'Add New', new_admin_user_path, class: 'btn btn-success '%></h2>
 <% if @users.exists? %>
 <table class="table table-striped">
   <tr>
@@ -17,6 +17,7 @@
   </tr> 
   <% end %>            
 </table>
+<div align="center"> <%= will_paginate @posts %></div>
 <% else %>
 <p>There are no users</p>
 <% end %>
